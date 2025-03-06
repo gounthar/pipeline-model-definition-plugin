@@ -22,19 +22,20 @@
  * THE SOFTWARE.
  */
 
-pipeline {
-    agent label:"some-label"
-    tools {
-        gradle "apache-maven-3.0.1"
+
+package org.jenkinsci.plugins.pipeline.modeldefinition.agent.impl
+
+import org.jenkinsci.plugins.pipeline.modeldefinition.agent.DeclarativeAgentScript
+import org.jenkinsci.plugins.workflow.cps.CpsScript
+
+class NoneScript extends DeclarativeAgentScript<None> {
+
+    NoneScript(CpsScript s, None a) {
+        super(s, a)
     }
-    stages {
-        stage("foo") {
-            steps {
-                sh "mvn -version"
-            }
-        }
+
+    @Override
+    Closure run(Closure body) {
+        return body
     }
 }
-
-
-
